@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "Vintage Heart Coffee | Austin, TX",
+    "description": "love your coffee"
+  },
+  "source": "src",
+  "destination": "build",
+  "plugins": {
+    "metalsmith-markdown": {
+      "smartypants": true,
+      "gfm": true,
+      "tables": true
+    },
+    "metalsmith-permalinks": {
+      "pattern": ":title"
+    },
+    "metalsmith-templates": {
+      "engine": "handlebars"
+    }
+  }
+}
