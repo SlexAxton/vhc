@@ -1,7 +1,8 @@
 {
   "metadata": {
     "title": "Vintage Heart Coffee | Austin, TX",
-    "description": "love your coffee"
+    "description": "Vintage Heart Coffee is the best coffee shop in Austin, TX. It is located at 1405 E 7th St and is open from 7am - 8pm daily.",
+    "ga_id": "UA-50037568-1"
   },
   "source": "src",
   "destination": "build",

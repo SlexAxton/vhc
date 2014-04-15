@@ -1,13 +1,27 @@
-<html>
-<head>
-  <title>{{ title }}</title>
-  <meta name="description" content="{{ description }}">
-</head>
-<body>
-  <h1>{{ title }}</h1>
-  <p>{{ description }}</p>
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{title}}</title>
+    <meta name="description" content="{{description}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/vintageheart.css">
+    <link href="/favicon.ico" rel="icon">
+    <script>(function(e,t){var n,r,a,o,i,Modernizr,s,c;function l(e){var t,n,r;t=a.className,n=Modernizr._config.classPrefix||"",r=RegExp("(^|\\s)"+n+"no-js(\\s|$)"),t=t.replace(r,"$1"+n+"js$2"),Modernizr._config.enableClasses&&(t+=" "+n+e.join(" "+n),a.className=t)}function u(e,t){return typeof e===t}function f(){var e,t,n,a,i,s,c,l;for(l in o){if(e=[],t=o[l],t.name&&(e.push(t.name.toLowerCase()),t.options&&t.options.aliases&&t.options.aliases.length))for(n=0;t.options.aliases.length>n;n++)e.push(t.options.aliases[n].toLowerCase());for(a=u(t.fn,"function")?t.fn():t.fn,i=0;e.length>i;i++)s=e[i],c=s.split("."),1===c.length?Modernizr[c[0]]=a:2===c.length&&(!Modernizr[c[0]]||Modernizr[c[0]]instanceof Boolean||(Modernizr[c[0]]=new Boolean(Modernizr[c[0]])),Modernizr[c[0]][c[1]]=a),r.push((a?"":"no-")+c.join("-"))}}function h(e,t){var n,r,a;if("object"==typeof e)for(n in e)s(e,n)&&h(n,e[n]);else{if(e=e.toLowerCase(),r=e.split("."),a=Modernizr[r[0]],2==r.length&&(a=a[r[1]]),a!==undefined)return Modernizr;t="function"==typeof t?t():t,1==r.length?Modernizr[r[0]]=t:2==r.length&&(!Modernizr[r[0]]||Modernizr[r[0]]instanceof Boolean||(Modernizr[r[0]]=new Boolean(Modernizr[r[0]])),Modernizr[r[0]][r[1]]=t),l([(t?"":"no-")+r.join("-")]),Modernizr._trigger(e,t)}return Modernizr}(function(e,t){var r,a,o,i,s,c,l,u,f;function h(e,t){var n=e.createElement("p"),r=e.getElementsByTagName("head")[0]||e.documentElement;return n.innerHTML="x<style>"+t+"</style>",r.insertBefore(n.lastChild,r.firstChild)}function d(){var e=n.elements;return"string"==typeof e?e.split(" "):e}function m(e){var t=u[e[c]];return t||(t={},l++,e[c]=l,u[l]=t),t}function g(e,n,r){if(n||(n=t),f)return n.createElement(e);r||(r=m(n));var a;return a=r.cache[e]?r.cache[e].cloneNode():i.test(e)?(r.cache[e]=r.createElem(e)).cloneNode():r.createElem(e),a.canHaveChildren&&!o.test(e)?r.frag.appendChild(a):a}function p(e,n){if(e||(e=t),f)return e.createDocumentFragment();n=n||m(e);for(var r=n.frag.cloneNode(),a=0,o=d(),i=o.length;i>a;a++)r.createElement(o[a]);return r}function v(e,t){t.cache||(t.cache={},t.createElem=e.createElement,t.createFrag=e.createDocumentFragment,t.frag=t.createFrag()),e.createElement=function(r){return n.shivMethods?g(r,e,t):t.createElem(r)},e.createDocumentFragment=Function("h,f","return function(){var n=f.cloneNode(),c=n.createElement;h.shivMethods&&("+d().join().replace(/\w+/g,function(e){return t.createElem(e),t.frag.createElement(e),'c("'+e+'")'})+");return n}")(n,t.frag)}function E(e){e||(e=t);var r=m(e);return!n.shivCSS||s||r.hasCSS||(r.hasCSS=!!h(e,"article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}")),f||v(e,r),e}r="3.6.2",a=e.html5||{},o=/^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i,i=/^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i,c="_html5shiv",l=0,u={},function(){try{var e=t.createElement("a");e.innerHTML="<xyz></xyz>",s="hidden"in e,f=1==e.childNodes.length||function(){t.createElement("a");var e=t.createDocumentFragment();return e.cloneNode===undefined||e.createDocumentFragment===undefined||e.createElement===undefined}()}catch(n){s=!0,f=!0}}(),n={elements:a.elements||"abbr article aside audio bdi canvas data datalist details figcaption figure footer header hgroup main mark meter nav output progress section summary time video",version:r,shivCSS:a.shivCSS!==!1,supportsUnknownElements:f,shivMethods:a.shivMethods!==!1,type:"default",shivDocument:E,createElement:g,createDocumentFragment:p},e.html5=n,E(t)})(this,t),r=[],a=t.documentElement,o=[],i={_version:"v3.0.0pre",_config:{classPrefix:"",enableClasses:!0,usePrefixes:!0},_q:[],on:function(e,t){setTimeout(function(){t(this[e])},0)},addTest:function(e,t,n){o.push({name:e,fn:t,options:n})},addAsyncTest:function(e){o.push({name:null,fn:e})}},Modernizr=function(){},Modernizr.prototype=i,Modernizr=new Modernizr,Modernizr.addTest("svg",!!t.createElementNS&&!!t.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect),function(){var e={}.hasOwnProperty;s=u(e,"undefined")||u(e.call,"undefined")?function(e,t){return t in e&&u(e.constructor.prototype[t],"undefined")}:function(t,n){return e.call(t,n)}}(),i._l={},i.on=function(e,t){this._l[e]||(this._l[e]=[]),this._l[e].push(t),Modernizr.hasOwnProperty(e)&&setTimeout(function(){Modernizr._trigger(e,Modernizr[e])},0)},i._trigger=function(e,t){if(this._l[e]){var n=this._l[e];setTimeout(function(){var e,r;for(e=0;n.length>e;e++)r=n[e],r(t)},0),delete this._l[e]}},Modernizr._q.push(function(){i.addTest=h}),Modernizr.addTest("svgasimg",t.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")),f(),l(r),delete i.addTest,delete i.addAsyncTest;for(c=0;Modernizr._q.length>c;c++)Modernizr._q[c]();e.Modernizr=Modernizr})(this,document);</script>
+  </head>
+  <body>
 
-  test!!
-  <script src="/static/js/vintageheart.js" async="true"></script>
-</body>
+    {{{ contents }}}
+
+    <script src="/static/js/vintageheart.js" async="true"></script>
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','{{ga_id}}');ga('send','pageview');
+    </script>
+  </body>
 </html>

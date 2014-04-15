@@ -1,3 +1,7 @@
+var rework_inline = require('rework-inline');
+var vars = require('rework-vars');
+var css_values = require('./static/styl/vars.json');
+
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -27,20 +31,42 @@ module.exports = function(grunt) {
           spawn: false
         }
       },
+      styles: {
+        files: ['static/styl/**/*.styl', 'static/styl/**/*.css', 'static/styl/vars.json'],
+        tasks: ['styl:dev'],
+        options: {}
+      },
+      live: {
+        // Here we watch the files the sass task will compile to
+        // These files are sent to the live reload server after sass compiles to them
+        files: ['build/static/css/**/*.css'],
+        tasks: ['shell:noop'],
+        options: {
+          livereload: true
+        }
+      },
       markup: {
         files: [
           'templates/**/*.html', 'templates/**/*.hbs',
-          'src/**/*.html', 'src/**/*.md', 'src/**/*.html'
+          'src/**/*.html', 'src/**/*.md', 'src/**/*.html',
+          'metalsmith.json'
         ],
-        tasks: ['clean', 'shell:metalsmith', 'browserify:dev', 'replace:dev'],
+        tasks: ['clean', 'shell:metalsmith', 'browserify:dev', 'replace:dev', 'styl:dev', 'copy:img'],
         options: {
-          spawn: false
+          spawn: false,
+          atBegin: true
         }
       }
     },
     shell: {
       metalsmith: {
         command: 'node_modules/.bin/metalsmith'
+      },
+      noop: {
+        command: 'echo "live reloaded."'
+      },
+      serve: {
+        command: 'serve -f build/favicon.ico build'
       }
     },
     browserify: {
@@ -64,6 +90,26 @@ module.exports = function(grunt) {
         }
       }
     },
+    styl: {
+      options: {
+        configure: function (styl) {
+          styl.use(rework_inline()).use(vars(css_values));
+        }
+      },
+      dev: {
+        files: {
+          'build/static/css/<%= pkg.name %>.css': 'static/styl/<%= pkg.name %>.styl'
+        }
+      },
+      prod: {
+        files: {
+          'build/static/css/<%= pkg.name %>.css': 'static/styl/<%= pkg.name %>.styl'
+        },
+        options: {
+          compress: true
+        }
+      }
+    },
     replace: {
       dev: {
         options: {
@@ -79,6 +125,12 @@ module.exports = function(grunt) {
           dest: 'build/static/js/<%= pkg.name %>.js'
         }]
       }
+    },
+    copy: {
+      img: {
+        src: ['static/img/**/*.jpg','static/img/**/*.png'],
+        dest: 'build/'
+      }
     }
   });
 
@@ -87,7 +139,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-styl');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-replace');
 
@@ -96,7 +150,11 @@ module.exports = function(grunt) {
     'shell:metalsmith',
     'jshint',
     'browserify:prod',
-    'uglify:build'
+    'uglify:build',
+    'styl:prod',
+    'copy:img'
   ]);
-   grunt.registerTask('build', ['default']);
+  grunt.registerTask('build', ['default']);
+
+  grunt.registerTask('serve', ['shell:serve']);
 };
