@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       },
       build: {
         src: 'build/static/js/<%= pkg.name %>.js',
-        dest: 'build/static/js/<%= pkg.name %>.min.js'
+        dest: 'build/static/js/<%= pkg.name %>.js'
       }
     },
     jshint: {
@@ -22,14 +22,17 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['static/js/**/*.js'],
-        tasks: ['jshint', 'browserify:dev'],
+        tasks: ['jshint', 'browserify:dev', 'replace:dev'],
         options: {
           spawn: false
         }
       },
       markup: {
-        files: ['src/**/*.html', 'src/**/*.md', 'src/**/*.html'],
-        tasks: ['shell:metalsmith'],
+        files: [
+          'templates/**/*.html', 'templates/**/*.hbs',
+          'src/**/*.html', 'src/**/*.md', 'src/**/*.html'
+        ],
+        tasks: ['clean', 'shell:metalsmith', 'browserify:dev', 'replace:dev'],
         options: {
           spawn: false
         }
@@ -42,11 +45,39 @@ module.exports = function(grunt) {
     },
     browserify: {
       dev: {
-        src: ['static/js/<%= pkg.name %>.js'],
-        dest: 'build/static/app.js',
+        src: 'static/js/<%= pkg.name %>.js',
+        dest: 'build/static/js/<%= pkg.name %>.js',
         options: {
-          watch: true
+          watch: true,
+          bundleOptions: {
+            debug: true
+          }
         }
+      },
+      prod: {
+        src: 'static/js/<%= pkg.name %>.js',
+        dest: 'build/static/js/<%= pkg.name %>.js',
+        options: {
+          bundleOptions: {
+            debug: false
+          }
+        }
+      }
+    },
+    replace: {
+      dev: {
+        options: {
+          patterns: [
+            {
+              match: /;$/,
+              replacement: ''
+            }
+          ]
+        },
+        files: [{
+          src: ['build/static/js/<%= pkg.name %>.js'],
+          dest: 'build/static/js/<%= pkg.name %>.js'
+        }]
       }
     }
   });
@@ -57,5 +88,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-shell-spawn');
+  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-replace');
+
+  grunt.registerTask('default', [
+    'clean',
+    'shell:metalsmith',
+    'jshint',
+    'browserify:prod',
+    'uglify:build'
+  ]);
+   grunt.registerTask('build', ['default']);
 };
