@@ -12,7 +12,7 @@
       "tables": true
     },
     "metalsmith-permalinks": {
-      "pattern": ":title"
+      "pattern": ":permalink"
     },
     "metalsmith-templates": {
       "engine": "handlebars"
