@@ -9,6 +9,12 @@
     "metalsmith-permalinks": "^0.3.0",
     "handlebars": "^2.0.0-alpha.2",
     "grunt": "^0.4.4",
-    "grunt-contrib-uglify": "^0.4.0"
+    "grunt-contrib-uglify": "^0.4.0",
+    "browserify": "^3.41.0",
+    "grunt-browserify": "^2.0.7",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-shell-spawn": "^0.3.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-clean": "^0.5.0"
   }
 }
