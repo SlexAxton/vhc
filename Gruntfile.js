@@ -67,6 +67,12 @@ module.exports = function(grunt) {
       },
       serve: {
         command: 'serve -f build/favicon.ico build'
+      },
+      deploy: {
+        command: 'rsync -avrc build slex@tipsy.io:/var/www/vintageheart.coffee',
+        options: {
+          stdout: true
+        }
       }
     },
     browserify: {
@@ -157,4 +163,5 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['default']);
 
   grunt.registerTask('serve', ['shell:serve']);
+  grunt.registerTask('deploy', ['build', 'shell:deploy']);
 };
