@@ -2,4 +2,4 @@
 template: index.html
 ---
 
-# Welcome to Vintage Heart Coffee, yo.
+This is the best page ever

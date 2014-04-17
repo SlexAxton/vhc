@@ -1,21 +1,45 @@
+@import "static/styl/vendor/normalize.css";
 @import "static/styl/vars.styl";
-@import "static/styl/test.styl" (min-width: 50px);
 
-html, body {
-  height: 100%;
+html {
+  background-color: #494846;
+}
+
+#bg {
+  position: fixed;
+  background: url(/static/img/main_bg_large.jpg) no-repeat center center fixed;
+  background-size: cover;
   width: 100%;
-  margin: 0;
-  padding: 0;
+  height: 100%;
+  top: 0;
+  opacity: 0.001;
+  z-index: -1;
+  transition-delay: 1s;
+  transition: opacity 0.6s;
+}
+#bg.bg-in {
+  opacity: 1;
 }
 
 body {
-  font-family: helvetica, arial;
+  font-family: var(sans);
+  font-weight: 400;
   color: var(my-color);
-  text-shadow: 1px 1px 0 #333;
 }
 
-#welcome-to-vintage-heart-coffee-yo- {
-  height: 800px;
-  background-color: rgba(0,0,0,0.2);
+header {
+  width: 480px;
 }
 
+svg {
+  width: 200px;
+  height: 200px;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-top: 42px;
+}
+
+/* @import "static/styl/test.styl" (min-width: 50px);*/

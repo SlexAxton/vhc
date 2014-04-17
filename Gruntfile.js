@@ -1,6 +1,8 @@
 var rework_inline = require('rework-inline');
 var vars = require('rework-vars');
 var css_values = require('./static/styl/vars.json');
+var fs = require('fs');
+var logo = fs.readFileSync('./static/img/logo_transparent.svg', 'utf8');
 
 module.exports = function(grunt) {
 
@@ -51,7 +53,7 @@ module.exports = function(grunt) {
           'src/**/*.html', 'src/**/*.md', 'src/**/*.html',
           'metalsmith.json'
         ],
-        tasks: ['clean', 'shell:metalsmith', 'browserify:dev', 'replace:dev', 'styl:dev', 'copy:img'],
+        tasks: ['clean', 'shell:metalsmith', 'replace:logo', 'browserify:dev', 'replace:dev', 'styl:dev', 'copy:img'],
         options: {
           spawn: false,
           atBegin: true
@@ -130,11 +132,25 @@ module.exports = function(grunt) {
           src: ['build/static/js/<%= pkg.name %>.js'],
           dest: 'build/static/js/<%= pkg.name %>.js'
         }]
+      },
+      logo: {
+        options: {
+          patterns: [
+            {
+              match: /__SVGLOGO__/g,
+              replacement: logo
+            }
+          ]
+        },
+        files: [{
+          src: ['build/index.html'],
+          dest: 'build/index.html'
+        }]
       }
     },
     copy: {
       img: {
-        src: ['static/img/**/*.jpg','static/img/**/*.png'],
+        src: ['static/img/**/*.svg', 'static/img/**/*.jpg','static/img/**/*.png'],
         dest: 'build/'
       }
     }
@@ -154,6 +170,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'clean',
     'shell:metalsmith',
+    'replace:logo',
     'jshint',
     'browserify:prod',
     'uglify:build',
