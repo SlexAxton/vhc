@@ -52,22 +52,29 @@ body {
   left: 0;
 }
 
-@media (max-width: 830px) {
+@media (max-width: 730px) {
   #bg {
     background-image: url('/static/img/main_bg_small-2.jpg') at-2x;
     background-size: cover;
-    background-position: center, center;
+    background-position: bottom, center;
+    height: 610px;
   }
 
   #toplogo {
     display: block;
     margin: 10px auto;
     max-width: 260px;
-    height: 520px;
+    height: 540px;
   }
 
   #toplogo svg {
 
+  }
+}
+@media (max-width: 620px) {
+  #bg {
+    height: 560px;
+    background-position: center, center;
   }
 }
 
