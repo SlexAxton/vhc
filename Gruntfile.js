@@ -1,6 +1,6 @@
-var rework_inline = require('rework-inline');
-var vars = require('rework-vars');
-var css_values = require('./static/styl/vars.json');
+var rework_import = require('rework-import');
+var rework_vars = require('rework-vars');
+var rework_at2x = require('rework-plugin-at2x');
 var fs = require('fs');
 var logo = fs.readFileSync('./static/img/logo_transparent.svg', 'utf8');
 
@@ -34,8 +34,8 @@ module.exports = function(grunt) {
         }
       },
       styles: {
-        files: ['static/styl/**/*.styl', 'static/styl/**/*.css', 'static/styl/vars.json'],
-        tasks: ['styl:dev'],
+        files: ['static/styl/**/*.styl', 'static/styl/**/*.css'],
+        tasks: ['rework:dev', 'autoprefixer:all'],
         options: {}
       },
       live: {
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
           'src/**/*.html', 'src/**/*.md', 'src/**/*.html',
           'metalsmith.json'
         ],
-        tasks: ['clean', 'shell:metalsmith', 'replace:logo', 'browserify:dev', 'replace:dev', 'styl:dev', 'copy:img'],
+        tasks: ['clean', 'shell:metalsmith', 'replace:logo', 'browserify:dev', 'replace:dev', 'rework:dev', 'autoprefixer:all', 'copy:img'],
         options: {
           spawn: false,
           atBegin: true
@@ -98,11 +98,18 @@ module.exports = function(grunt) {
         }
       }
     },
-    styl: {
+    rework: {
       options: {
-        configure: function (styl) {
-          styl.use(rework_inline()).use(vars(css_values));
-        }
+        use: [
+          rework_vars(),
+          rework_import({
+            path: [
+                'static/styl/vendor',
+                'node_modules',
+            ]
+          }),
+          rework_at2x()
+        ]
       },
       dev: {
         files: {
@@ -110,11 +117,13 @@ module.exports = function(grunt) {
         }
       },
       prod: {
+        options: {
+          toString: {
+            compress: true
+          }
+        },
         files: {
           'build/static/css/<%= pkg.name %>.css': 'static/styl/<%= pkg.name %>.styl'
-        },
-        options: {
-          compress: true
         }
       }
     },
@@ -153,6 +162,13 @@ module.exports = function(grunt) {
         src: ['static/img/**/*.svg', 'static/img/**/*.jpg','static/img/**/*.png'],
         dest: 'build/'
       }
+    },
+    autoprefixer: {
+      options: {},
+      all: {
+        src: 'build/static/css/<%= pkg.name %>.css',
+        dest: 'build/static/css/<%= pkg.name %>.css'
+      }
     }
   });
 
@@ -163,7 +179,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-styl');
+  grunt.loadNpmTasks('grunt-rework');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-replace');
 
@@ -174,7 +191,8 @@ module.exports = function(grunt) {
     'jshint',
     'browserify:prod',
     'uglify:build',
-    'styl:prod',
+    'rework:prod',
+    'autoprefixer:all',
     'copy:img'
   ]);
   grunt.registerTask('build', ['default']);
