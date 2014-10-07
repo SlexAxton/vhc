@@ -14,14 +14,14 @@
   <body>
 
     <div id="bg"></div>
-    <header>
+    <header id="toplogo">
       __SVGLOGO__
     </header>
     <div class="page-container">
 {{{ contents }}}
     </div>
 
-    <script src="/static/js/vintageheart.js" async></script>
+    <!-- script src="/static/js/vintageheart.js" async></script-->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -30,8 +30,67 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','{{ga_id}}');ga('send','pageview');
 
-      setTimeout(function(){ document.getElementById('bg').className = 'bg-in'; }, 0);
+      setTimeout(function(){
+        document.getElementById('bg').className = 'bg-in';
+      }, 0);
+
+      (function(){
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCssXGBxOkxCeSDhJIdN1FNMDrwLnomk84&v=3.exp&libraries=places&callback=mapmaker';
+        document.body.appendChild(script);
+      })();
+
+      function mapmaker() {
+        var placeid = 'ChIJ_Yu4jrC1RIYR7gN5B_yPTww';
+
+        var request = {
+          placeId: 'ChIJ_Yu4jrC1RIYR7gN5B_yPTww'
+        };
+
+        var pos = {
+          lat: 30.26495,
+          lng: -97.727726
+        };
+
+        var map = new google.maps.Map(
+          document.getElementById('map'),
+          {
+            center: pos,
+            zoom: 15,
+            scrollwheel: false,
+            draggable: false,
+            noClear: true
+          }
+        );
+
+        var infowindow = new google.maps.InfoWindow();
+
+        function createMarker(place) {
+          var placeLoc = place.geometry.location;
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+
+          console.log(place);
+          infowindow.setContent(
+              '<h5>' + place.name + '</h5>' +
+              '<p>1405 E 7<sup>th</sup> St.<br /> Austin, TX 78702'
+          );
+          infowindow.open(map, marker);
+        }
+
+        var service = new google.maps.places.PlacesService(map);
+        service.getDetails(request, function callback(place, status) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            createMarker(place);
+          }
+        });
+      }
+
       window.addEventListener('load',function() {
+        // Kill menubar
         setTimeout(function(){
           window.scrollTo(0, 1);
         }, 0);
