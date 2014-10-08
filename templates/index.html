@@ -128,8 +128,7 @@
         for(var i = 0; i < data.length; i++) {
           html += '<li><a target="_blank" href="' + encodeURI(data[i].link) + '"><img src="' +
             encodeURI(data[i].images.low_resolution.url) +
-            '" width="120" height="120" />' +
-            '<div class="caption">' + text_escape(data[i].caption.text) + '</div>' +
+            '" width="120" height="120" title="' + text_escape(data[i].caption.text) + '" />' +
             '</a></li>';
         }
         html += '</ul>';

@@ -79,7 +79,7 @@ body {
 }
 
 .page-container {
-  padding: 10px 0;
+  padding: 0;
   background-color: #f4f5f6;
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
@@ -97,6 +97,14 @@ h5 {
   text-align: left;
   margin: 5px 0;
   padding: 0;
+}
+
+.open {
+  font-size: 22px;
+  color: #292e31;
+  text-align: center;
+  padding: 10px;
+  text-shadow: 1px 1px 0 rgba(255,255,255,1);
 }
 
 #map {
@@ -154,27 +162,37 @@ h5 {
 }
 
 .infowindow {
+  width: 190px;
   height: 67px;
 }
 
 #instagramphotos-container {
   background-color: #565656;
-  padding: 4px 0 0;
-  height: 124px;
+  padding: 0;
+  height: 120px;
+  width: 100%;
+  opacity: 0.8;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+#instagramphotos-container:hover {
+  opacity: 1;
 }
 #instagramphotos {
   list-style: none;
   padding: 0;
+  margin: 0;
+  width: 2480px;
   overflow: hidden;
-  margin: 0 auto;
-  white-space: nowrap;
 }
 #instagramphotos li {
-  display: inline-block;
+  display: block;
   width: 120px;
   height: 120px;
-  margin: 0 2px;
+  margin: 0;
   overflow: hidden;
+  float: left;
+  border-right: 1px solid #f4f5f6;
 }
 #instagramphotos li a {
  display: block;
@@ -188,27 +206,4 @@ h5 {
   border: none;
   margin: 0;
   padding: 0;
-}
-
-#instagramphotos li .caption {
-  display: block;
-  font-size: 11px;
-  white-space: normal;
-  pointer-events: none;
-  position: absolute;
-  width: 100px;
-  margin: 5px;
-  margin-top:-119px;
-  height: 100px;
-  padding: 5px;
-  overflow: hidden;
-  background-color: rgba(0,0,0,0.5);
-  color: #f4f5f6;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  box-shadow: 0 0 5px rgba(0,0,0,0.8);
-}
-
-#instagramphotos li a:hover .caption {
-  opacity: 1;
 }
