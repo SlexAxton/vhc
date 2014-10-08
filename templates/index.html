@@ -13,6 +13,20 @@
   <body>
 
     <div id="bg"></div>
+    <div id="menuything">
+      <a target="_blank" href="https://www.google.com/maps/place/Vintage+Heart+Coffee/@30.26429,-97.727726,17z/data=!3m1!4b1!4m2!3m1!1s0x8644b5b08eb88bfd:0xc4f8ffc077903ee">
+      <svg id="mapicon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 100 100" xml:space="preserve">
+        <path fill="#FFFFFF" d="M79.535,27.4c-0.32-1.201-0.971-2.48-1.452-3.6C72.324,9.96,59.741,5,49.581,5
+          C35.98,5,21,14.12,19,32.919v3.841c0,0.16,0.055,1.6,0.134,2.32c1.121,8.959,8.19,18.48,13.47,27.439
+          c5.68,9.599,11.574,19.041,17.414,28.48c3.6-6.159,7.188-12.399,10.706-18.4c0.96-1.76,2.073-3.52,3.033-5.2
+          c0.64-1.119,1.862-2.239,2.421-3.28C71.857,57.72,81,47.24,81,36.92v-4.24C81,31.561,79.614,27.641,79.535,27.4z M49.83,46.68
+          c-3.998,0-8.374-1.999-10.534-7.52C38.974,38.281,39,36.52,39,36.359v-2.48c0-7.038,5.976-10.239,11.175-10.239
+          c6.4,0,11.351,5.121,11.351,11.521C61.525,41.561,56.23,46.68,49.83,46.68z"/>
+      </svg>
+      1405 E 7<sup>th</sup> St</a> |
+    <span class="hours">Hours</span> 7am - 8pm
+    </div>
     <header id="toplogo">
       __SVGLOGO__
     </header>
@@ -113,22 +127,25 @@
         window.text_escape = createEscaper(escapeMap);
       })();
 
+      var less = screen.width > 599 ? false : true;
+
       (function getRecentPhotos() {
         var s = document.createElement('script');
         s.type = 'text/javascript';
         s.async = true;
-        s.src = 'https://api.instagram.com/v1/users/232645208/media/recent/?client_id=1a3e4cfffd4541f6918632ee5a579aa2&callback=showphotos';
+        var count = less ? 10 : 30;
+        s.src = 'https://api.instagram.com/v1/users/232645208/media/recent/?client_id=1a3e4cfffd4541f6918632ee5a579aa2&count='+count+'&callback=showphotos';
         document.body.appendChild(s);
       })();
 
       window.showphotos = function showphotos(resp) {
         var el = document.getElementById('instagramphotos-container');
-        var html = '<ul id="instagramphotos">';
+        var html = '<ul id="instagramphotos" ' + (less ? 'class="less"' : '') + '>';
         var data = resp.data;
         for(var i = 0; i < data.length; i++) {
           html += '<li><a target="_blank" href="' + encodeURI(data[i].link) + '"><img src="' +
-            encodeURI(data[i].images.low_resolution.url) +
-            '" width="120" height="120" title="' + text_escape(data[i].caption.text) + '" />' +
+            encodeURI(data[i].images.thumbnail.url) +
+            '" width="60" height="60" title="' + text_escape(data[i].caption.text) + '" />' +
             '</a></li>';
         }
         html += '</ul>';
@@ -145,11 +162,11 @@
           }
           last = now;
           var top = (window.pageYOffset || document.scrollTop)  - (document.clientTop || 0);
-          if (wasabove !== false && top > 270) {
+          if (wasabove !== false && top > 260) {
             toplogo.className = 'below';
             wasabove = false;
           }
-          else if (wasabove !== true && top <= 270) {
+          else if (wasabove !== true && top <= 260) {
             toplogo.className = '';
             wasabove = true;
           }

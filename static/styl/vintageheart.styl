@@ -9,6 +9,12 @@ html {
   background-color: #494846;
 }
 
+body {
+  font-family: var(--sans);
+  font-weight: 400;
+  color: var(--my-color);
+}
+
 #bg {
   position: fixed;
   top: 0;
@@ -28,10 +34,36 @@ html {
   opacity: 1;
 }
 
-body {
-  font-family: var(--sans);
-  font-weight: 400;
-  color: var(--my-color);
+#menuything {
+  position: absolute;
+  z-index: 100;
+  top: 10px;
+  right: 10px;
+  display: block;
+  height: 30px;
+  color: #f4f5f6;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+}
+#menuything .hours {
+  font-weight: bold;
+}
+
+#menuything a {
+  text-decoration: none;
+  color: #f4f5f6;
+}
+#menuything a:visited {
+  color: #f4f5f6;
+}
+#menuything a:hover {
+  text-decoration: underlline;
+}
+#mapicon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-bottom: -3px;
+  margin-right: -2px;
 }
 
 #toplogo {
@@ -76,7 +108,10 @@ body {
   }
   #toplogo.below svg {
     position: relative;
-    margin-top: 270px;
+    margin-top: 260px;
+  }
+  #menuything {
+    top: 530px;
   }
 }
 @media (max-width: 620px) {
@@ -177,42 +212,46 @@ h5 {
 #instagramphotos-container {
   background-color: #565656;
   padding: 0;
-  height: 120px;
+  height: 60px;
   width: 100%;
   opacity: 0.8;
   overflow: hidden;
-  transition: opacity 0.3s ease-in-out;
-  transition-delay: 0.4s;
-}
-#instagramphotos-container:hover {
-  opacity: 1;
+  box-shadow: 0 0 1px rgb(0,0,0);
 }
 #instagramphotos {
-  list-style: none;
   padding: 0;
-  margin: 0;
-  width: 2480px;
-  overflow: hidden;
+  margin: 0 auto;
+  width: 1800px;
+  height: 60px;
+}
+#instagramphotos.less {
+  width: 600px;
 }
 #instagramphotos li {
   display: block;
-  width: 120px;
-  height: 120px;
+  width: 60px;
+  height: 60px;
   margin: 0;
   overflow: hidden;
   float: left;
-  border-right: 1px solid #f4f5f6;
 }
 #instagramphotos li a {
  display: block;
  margin: 0;
  padding: 0;
- height: 120px;
- width: 120px;
+ height: 60px;
+ width: 60px;
 }
 
 #instagramphotos li a img {
   border: none;
   margin: 0;
   padding: 0;
+  transition: opacity 0.3s ease-in-out;
+  transition-delay: 0.1s;
+  opacity: 0.4;
 }
+#instagramphotos li a img:hover {
+  opacity: 1;
+}
+
