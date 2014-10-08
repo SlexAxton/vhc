@@ -89,12 +89,52 @@
         });
       }
 
-      window.addEventListener('load',function() {
-        // Kill menubar
-        setTimeout(function(){
-          window.scrollTo(0, 1);
-        }, 0);
-      });
+      (function() {
+        var escapeMap = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#x27;',
+          '`': '&#x60;'
+        };
+        var createEscaper = function(map) {
+          var escaper = function(match) {
+            return map[match];
+          };
+          var source = '(?:' + ['&', '<', '>', '"', "'", '`'].join('|') + ')';
+          var testRegexp = RegExp(source);
+          var replaceRegexp = RegExp(source, 'g');
+          return function(string) {
+            string = string == null ? '' : '' + string;
+            return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
+          };
+        };
+        window.text_escape = createEscaper(escapeMap);
+      })();
+
+      (function getRecentPhotos() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'https://api.instagram.com/v1/users/232645208/media/recent/?client_id=1a3e4cfffd4541f6918632ee5a579aa2&callback=showphotos';
+        document.body.appendChild(s);
+      })();
+
+      window.showphotos = function showphotos(resp) {
+        var el = document.getElementById('instagramphotos-container');
+        var html = '<ul id="instagramphotos">';
+        var data = resp.data;
+        for(var i = 0; i < data.length; i++) {
+          html += '<li><a target="_blank" href="' + encodeURI(data[i].link) + '"><img src="' +
+            encodeURI(data[i].images.low_resolution.url) +
+            '" width="120" height="120" />' +
+            '<div class="caption">' + text_escape(data[i].caption.text) + '</div>' +
+            '</a></li>';
+        }
+        html += '</ul>';
+        el.innerHTML = html;
+      };
     </script>
   </body>
 </html>
