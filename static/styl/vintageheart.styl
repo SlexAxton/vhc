@@ -35,7 +35,7 @@ body {
 }
 
 #menuything {
-  position: absolute;
+  position: fixed;
   z-index: 100;
   top: 10px;
   right: 10px;
@@ -44,13 +44,19 @@ body {
   color: #f4f5f6;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
 }
+#menuything.below {
+  position: absolute;
+  top: 506px;
+}
 #menuything .hours {
   font-weight: bold;
 }
 
 #menuything a {
+  display: inline-block;
   text-decoration: none;
   color: #f4f5f6;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
 }
 #menuything a:visited {
   color: #f4f5f6;
@@ -108,9 +114,11 @@ body {
   }
   #toplogo.below svg {
     position: relative;
-    margin-top: 260px;
+    margin-top: 261px;
   }
-  #menuything {
+  #menuything,
+  #menuything.below {
+    position: absolute;
     top: 530px;
   }
 }
@@ -124,7 +132,69 @@ body {
 .page-container {
   padding: 0;
   background-color: #f4f5f6;
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+.page-container p {
+  padding: 10px 30px;
+}
+
+#openingp {
+  font-size: 40px;
+}
+#openingp strong {
+  font-size: 52px;
+}
+.open a {
+  color: rgba(76, 85, 90, 0.9);
+  text-decoration: none;
+  border-bottom: 2px solid rgba(76, 85, 90, 0.3);
+}
+
+#secondaryimage-container {
+  width: 100%;
+  overflow: hidden;
+}
+#secondaryimage {
+  height: 400px;
+  background-image: url('/static/img/secondary_bg_large.jpg') at-2x;
+  background-size: cover;
+  background-position-x: 100%;
+  background-position-y: 100%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4) inset;
+  width: 104%;
+  margin-left: -2%;
+}
+
+#thirdcoastbag {
+  float: left;
+  padding: 10px 50px 10px 10px;
+  width: 160px;
+}
+
+#quote {
+  color: #f4f5f6;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+  font-size: 26px;
+  margin: 0 auto;
+  display: block;
+  opacity: 0.9;
+  max-width: 960px;
+  padding: 8% 10%;
+}
+#yelp {
+  display: block;
+  font-size: 12px;
+  padding-left: 10px;
+}
+@media (max-width: 642px) {
+  #yelp {
+    padding-left: 0;
+  }
+}
+#yelp a {
+  text-decoration: none;
+  color: rgba(255,255,255,0.8);
+  border-bottom: 1px solid rgba(255,255,255,0.4);
 }
 
 h2 {
@@ -145,9 +215,10 @@ h5 {
 .open {
   font-size: 22px;
   color: #292e31;
-  text-align: center;
   padding: 10px;
   text-shadow: 1px 1px 0 rgba(255,255,255,1);
+  max-width: 1016px;
+  margin: 10px auto;
 }
 
 #map {
@@ -157,6 +228,7 @@ h5 {
   overflow: hidden;
 }
 #map p {
+  padding: 0;
   margin: 2px 0;
 }
 @media (max-width: 940px) {

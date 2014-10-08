@@ -25,7 +25,7 @@
           c6.4,0,11.351,5.121,11.351,11.521C61.525,41.561,56.23,46.68,49.83,46.68z"/>
       </svg>
       1405 E 7<sup>th</sup> St</a> |
-    <span class="hours">Hours</span> 7am - 8pm
+    <span class="hours">Hours</span> 7am &ndash; 8pm
     </div>
     <header id="toplogo">
       __SVGLOGO__
@@ -153,7 +153,8 @@
       };
 
       (function() {
-        var wasabove;
+        var topwasabove;
+        var menuwasabove;
         var last = (+new Date());
         window.onscroll = function() {
           var now = (+new Date());
@@ -162,13 +163,21 @@
           }
           last = now;
           var top = (window.pageYOffset || document.scrollTop)  - (document.clientTop || 0);
-          if (wasabove !== false && top > 260) {
+          if (topwasabove !== false && top > 260) {
             toplogo.className = 'below';
-            wasabove = false;
+            topwasabove = false;
           }
-          else if (wasabove !== true && top <= 260) {
+          else if (topwasabove !== true && top <= 260) {
             toplogo.className = '';
-            wasabove = true;
+            topwasabove = true;
+          }
+          if (menuwasabove !== false && top > 505) {
+            menuything.className = 'below';
+            menuwasabove = false;
+          }
+          else if (menuwasabove !== true && top <= 505) {
+            menuything.className = '';
+            menuwasabove = true;
           }
         };
       })();
