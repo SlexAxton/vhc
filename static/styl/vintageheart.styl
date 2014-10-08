@@ -68,7 +68,15 @@ body {
   }
 
   #toplogo svg {
-
+    display: block;
+    position: fixed;
+    top: initial;
+    left: initial;
+    width: 260px;
+  }
+  #toplogo.below svg {
+    position: relative;
+    margin-top: 270px;
   }
 }
 @media (max-width: 620px) {
@@ -174,6 +182,7 @@ h5 {
   opacity: 0.8;
   overflow: hidden;
   transition: opacity 0.3s ease-in-out;
+  transition-delay: 0.4s;
 }
 #instagramphotos-container:hover {
   opacity: 1;

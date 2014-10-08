@@ -134,6 +134,27 @@
         html += '</ul>';
         el.innerHTML = html;
       };
+
+      (function() {
+        var wasabove;
+        var last = (+new Date());
+        window.onscroll = function() {
+          var now = (+new Date());
+          if (now - last < 16) {
+            return;
+          }
+          last = now;
+          var top = (window.pageYOffset || document.scrollTop)  - (document.clientTop || 0);
+          if (wasabove !== false && top > 270) {
+            toplogo.className = 'below';
+            wasabove = false;
+          }
+          else if (wasabove !== true && top <= 270) {
+            toplogo.className = '';
+            wasabove = true;
+          }
+        };
+      })();
     </script>
   </body>
 </html>
