@@ -161,6 +161,10 @@ module.exports = function(grunt) {
       img: {
         src: ['static/img/**/*.svg', 'static/img/**/*.jpg','static/img/**/*.png'],
         dest: 'build/'
+      },
+      fonts: {
+        src: ['static/fonts/**/*'],
+        dest: 'build/'
       }
     },
     autoprefixer: {
@@ -193,7 +197,8 @@ module.exports = function(grunt) {
     'uglify:build',
     'rework:prod',
     'autoprefixer:all',
-    'copy:img'
+    'copy:img',
+    'copy:fonts'
   ]);
   grunt.registerTask('build', ['default']);
 
